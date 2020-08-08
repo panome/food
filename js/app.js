@@ -44,6 +44,53 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 	//TIMER
+	const deadline = '2020-08-10'
+
+	function getTimeRemaining(endtime) {
+		const t = Date.parse(endtime) - Date.parse(new Date()),
+				seconds = Math.floor((t / 1000) % 60),
+				minutes = Math.floor(t / (1000 * 60) % 60),
+				hours = Math.floor(t / (1000 * 60 * 60) % 24),
+				days = Math.floor(t / (1000 * 60 * 60 * 24))
+		
+		return {
+			'total': t,
+			'seconds': seconds,
+			'minutes': minutes,
+			'hours': hours,
+			'days': days
+		}
+	}
+
+	function addZero(num) {
+		if (num >= 0 && num < 10) {
+			return `0${num}`
+		} else {
+			return num
+		}
+	}
+	
+	function setClock(selector, endtime) {
+		const timer = document.querySelector(selector),
+				seconds = timer.querySelector('#seconds'),
+				minutes = timer.querySelector('#minutes'),
+				hours = timer.querySelector('#hours'),
+				days = timer.querySelector('#days'),
+				timeInterval = setInterval(updateClock, 1000)
+
+		updateClock()
+
+		function updateClock() {
+			const t = getTimeRemaining(endtime)
+
+			seconds.innerHTML = addZero(t.seconds)
+			minutes.innerHTML = addZero(t.minutes)
+			hours.innerHTML = addZero(t.hours)
+			days.innerHTML = addZero(t.days)
+		}
+	}
+	setClock('.timer', deadline)
+
 	//MODAL
 	const modal = document.querySelector('[data-modal]'),
 			modalOpen = document.querySelectorAll('[data-modalOpen]'),
