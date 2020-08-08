@@ -11,5 +11,6 @@
 	"devel": true,
 	"jquery": true,
 	"esversion": 6,
-	"asi": true
+	"asi": true,
+	"node": true
 }
